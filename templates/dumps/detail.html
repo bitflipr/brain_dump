@@ -1,8 +1,12 @@
+<a href="{% url dump_index %}">back</a>
+
 <h1>{{ dump.title }}</h1>
 <h2>{{ dump.date }}</h2>
+
 <ul>
 {% for link in dump.link_set.all %}
   <li><a href="{{ link.url }}">{{ link.url }}</a></li>
 {% endfor %}
 </ul>
+
 <p>{{ dump.description }}</p>
