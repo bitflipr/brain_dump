@@ -1,5 +1,10 @@
 # Brain Dump
-A Django app for "dumping" ideas, thoughts, and breadcrumbs from the brain
+A Django app for "dumping" ideas, thoughts, and breadcrumbs from the brain. Use for tracking stuff in your head. Examples:
+
+- Cool articles you found on the web. Mark them for follow-up later if you are busy.
+- Post a picture of something cool you saw or need to reference at a later date
+- Post thoughts on something you recently learned
+
 
 # Installation
 1. Navigate to your Django site folder (containing manage.py) and clone this repo using the command: `git clone https://github.com/bitflipr/brain_dump.git`
