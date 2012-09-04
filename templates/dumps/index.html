@@ -1,0 +1,7 @@
+{% if dump_list %}
+  {% for dump in dump_list %}
+    <p><a href="{% url brain_dump.views.detail dump.id %}">{{ dump.title }}</a></p>
+  {% endfor %}
+{% else %}
+  <p>Nothing here</p>
+{% endif %}
