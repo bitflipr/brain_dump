@@ -1,3 +1,9 @@
+{% if request.user.is_authenticated %}
+  <p>Logged in: {{ request.user }}</p>
+{% else %}
+  <p>Logged out</p>
+{% endif %}
+
 <h1>Brain Dump</h1>
 {% if dump_list %}
   {% for dump in dump_list %}
