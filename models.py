@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 import datetime
+import httplib
+import urlparse
 
 # Create your models here.
 class Dump(models.Model):
@@ -43,3 +45,19 @@ class Link(models.Model):
           return True
       
     return False
+
+  def url_is_valid(self):
+    VALID_RESPONSES = [200, 301, 302]
+    valid = False;
+
+    host, path = urlparse.urlsplit(self.url)[1:3]
+    try:
+      connection = httplib.HTTPConnection(host)
+      connection.request("HEAD", path)
+      responseObject = connection.getresponse()
+      if responseObject.status in VALID_RESPONSES:
+        valid = True
+    except:
+      pass
+
+    return valid

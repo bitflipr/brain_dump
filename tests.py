@@ -15,6 +15,25 @@ class LinkTestCase(TestCase):
     link = Link(url=my_url)
     self.assertEqual(my_url, link.url) 
 
+  def test_url_is_valid(self):
+    VALID_URLS = [
+      'http://www.google.com',
+      'http://www.microsoft.com/windows',
+    ]
+    
+    for my_url in VALID_URLS:
+      link = Link(url=my_url)
+      self.assertTrue(link.url_is_valid(), msg='[%s] is an invalid url' % link)
+
+    INVALID_URLS = [
+      'this_is_not_an_url',
+      'http://www.asldkfjsaldkjfldsakjf.com',
+    ]
+    
+    for my_url in INVALID_URLS:
+      link = Link(url=my_url)
+      self.assertFalse(link.url_is_valid(), msg='[%s] is a valid url' % link)
+
   def test_is_a_picture(self):
     PICTURES = [
       'test.jpeg',
