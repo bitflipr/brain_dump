@@ -32,7 +32,7 @@ class Link(models.Model):
   PICTURE_TYPES = ['jpeg', 'jpg', 'gif', 'png']
 
   dump = models.ForeignKey(Dump)
-  url = models.CharField(max_length=128)
+  url = models.URLField()
 
   def __unicode__(self):
     return self.url
