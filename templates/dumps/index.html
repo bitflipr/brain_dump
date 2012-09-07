@@ -1,7 +1,11 @@
 {% if request.user.is_authenticated %}
-  <p>Logged in: {{ request.user }}</p>
+  <p>Signed In: {{ request.user }}</p>
+  <form action="{% url brain_dump.views.sign_out %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Sign Out"/>
+  </form>
 {% else %}
-  <p>Logged out</p>
+  <p>Signed Out</p>
 {% endif %}
 
 <h1>Brain Dump</h1>

@@ -98,18 +98,24 @@ class ViewDumpsListTestCase(TestCase):
     response = self.client.get('/dumps/')
     self.assertEqual(response.status_code, 200)
 
-  def test_logged_out(self):
+  def test_signing_in_and_out(self):
     response = self.client.get('/dumps/')
-    found = response.content.find('Logged out') > -1
+    found = response.content.find('Signed Out') > -1
     self.assertTrue(found)
 
-  def test_logged_in(self):
     User.objects.create_user('john', 'john@mail.com', 'password')
     
-    user = self.client.login(username='john', password='password')
+    self.client.login(username='john', password='password')
     response = self.client.get('/dumps/')
-    found = response.content.find('Logged in: john') > -1
+    found = response.content.find('Signed In: john') > -1
 
+    self.assertTrue(found)
+
+    response = self.client.post('/dumps/signout/')
+    self.assertRedirects(response, '/dumps/')
+    
+    response = self.client.get('/dumps/')
+    found = response.content.find('Signed Out') > -1
     self.assertTrue(found)
 
   def test_adding_to_list(self):
