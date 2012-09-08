@@ -10,10 +10,12 @@ from brain_dump.models import Dump, Link
 from django.db import DatabaseError
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.utils import timezone
+from taggit.models import Tag
 
 class ModelDumpTestCase(TestCase):
   
-  def dump_creation(self):
+  def test_creation(self):
     my_type = 'L'
     my_title = 'Title'
     my_description = 'Description'
@@ -27,6 +29,13 @@ class ModelDumpTestCase(TestCase):
     self.assertEqual(my_description, dump.description)
     self.assertEqual(my_follow_up, dump.follow_up)
     self.assertEqual(my_date, dump.date)
+
+  def test_adding_tags(self):
+    dump = Dump(title='Hello')
+    dump.save()
+    dump.tags.add('tag1')
+
+    self.assertEqual('tag1', dump.tags.all()[0].name)
 
 class ModelLinkTestCase(TestCase):
 
