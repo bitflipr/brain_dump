@@ -1,8 +1,8 @@
 from django.db import models
 from django.utils import timezone
-import datetime
-import httplib
-import urlparse
+import datetime, httplib, urlparse
+
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Dump(models.Model):
@@ -20,6 +20,7 @@ class Dump(models.Model):
   description = models.TextField(blank=True)
   follow_up = models.BooleanField(default=False)
   date = models.DateTimeField(default=timezone.now())
+  tags = TaggableManager()
 
   def __unicode__(self):
     return self.type + u"'" + self.title + u"'"
