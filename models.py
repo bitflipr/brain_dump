@@ -20,7 +20,7 @@ class Dump(models.Model):
   description = models.TextField(blank=True)
   follow_up = models.BooleanField(default=False)
   date = models.DateTimeField(default=timezone.now())
-  tags = TaggableManager()
+  tags = TaggableManager(blank=True)
 
   def __unicode__(self):
     return self.type + u"'" + self.title + u"'"
@@ -34,9 +34,14 @@ class Link(models.Model):
 
   dump = models.ForeignKey(Dump)
   url = models.URLField()
+  title = models.CharField(max_length=128, blank=True)
 
   def __unicode__(self):
-    return self.url
+    label = self.url
+    if self.title != '':
+      label = self.title + ": " + label
+
+    return label
 
   def is_a_picture(self):
     if "." in self.url:
