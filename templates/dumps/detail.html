@@ -1,3 +1,9 @@
+{% extends "dumps/base.html" %}
+
+{% block title %}Dump: {{ dump.title }}{% endblock %}
+
+{% block content %}
+
 <a href="{% url dump_index %}">back</a>
 
 <h1>{{ dump.title }}</h1>
@@ -17,3 +23,5 @@ Tags:
 </ul>
 
 <p>{{ dump.description }}</p>
+
+{% endblock %}

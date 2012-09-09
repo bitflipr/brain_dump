@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block title %}Brain Dump Site{% endblock %}</title>
+</head>
+
+<body>
+
+  <h1>Brain Dump</h1>
+
+  {% if user.is_authenticated %}
+    <p>Signed In: {{ user }}</p>
+    <form action="{% url brain_dump.views.sign_out %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="Sign Out"/>
+    </form>
+  {% else %}
+    <p>Signed Out</p>
+  {% endif %}
+
+  <hr/>
+
+  <div id="content">
+    {% block content %}{% endblock %}
+  </div>
+
+</body>
+</html>

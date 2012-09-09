@@ -1,14 +1,13 @@
-{% if request.user.is_authenticated %}
-  <p>Signed In: {{ request.user }}</p>
-  <form action="{% url brain_dump.views.sign_out %}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Sign Out"/>
-  </form>
-{% else %}
-  <p>Signed Out</p>
+{% extends "dumps/base.html" %}
+
+{% block title %}Brain Dump List{% endblock %}
+
+{% block content %}
+
+{% if perms.brain_dump.add_dump %}
+  <p>Can add a dump</p>
 {% endif %}
 
-<h1>Brain Dump</h1>
 {% if dump_list %}
   {% for dump in dump_list %}
     <p>
@@ -20,3 +19,5 @@
 {% else %}
   <p>Nothing here</p>
 {% endif %}
+
+{% endblock %}
