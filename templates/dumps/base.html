@@ -6,8 +6,8 @@
 
 <body>
 
-  <h1>Brain Dump</h1>
-
+<a href="{% url dump_index %}"><h1>Brain Dump</h1></a>
+  
   {% if user.is_authenticated %}
     <p>Signed In: {{ user }}</p>
     <form action="{% url brain_dump.views.sign_out %}" method="post">

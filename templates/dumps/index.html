@@ -5,7 +5,7 @@
 {% block content %}
 
 {% if perms.brain_dump.add_dump %}
-  <p>Can add a dump</p>
+  <a href="{% url brain_dump.views.new %}">Create a dump</a>
 {% endif %}
 
 {% if dump_list %}

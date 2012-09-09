@@ -1,0 +1,13 @@
+{% extends "dumps/base.html" %}
+
+{% block title %}New Dump{% endblock %}
+
+{% block content %}
+
+<form action="{% url brain_dump.views.add %}" method="post">
+  {% csrf_token %}
+  Title: <input type="text" name="title" />
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

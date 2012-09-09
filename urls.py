@@ -14,5 +14,7 @@ urlpatterns = patterns('',
         model=Dump,
         template_name='dumps/detail.html'),
       name='dump_detail'),
+    url(r'^new/$', 'brain_dump.views.new'),
+    url(r'^add/$', 'brain_dump.views.add'),
     url(r'^signout/$', 'brain_dump.views.sign_out'),
 )
