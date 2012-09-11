@@ -14,8 +14,10 @@ def new(request):
 
 def add(request):
   if request.method == 'POST':
-    title_added = request.POST['title']
-    dump = Dump.objects.create(title=title_added)
+    dump = Dump.objects.create(
+      type=request.POST['type'],
+      title=request.POST['title'],
+      description=request.POST['description'])
     dump.save()  
     return HttpResponseRedirect(reverse('dump_index'))
   else:

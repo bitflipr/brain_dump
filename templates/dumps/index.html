@@ -9,7 +9,15 @@
   <div id="NewForm" style="display:none">
     <form action="{% url brain_dump.views.add %}" method="post">
       {% csrf_token %}
-      Title: <input type="text" name="title" />
+
+      Type:<select name="type">
+        <option value="B">Post</option>
+        <option value="L">Link</option>
+        <option value="P">Picture</option>
+      </select><br/>
+      Title:<input type="text" name="title" /></br>
+      Description:<textarea name="description" rows="4" cols="50"></textarea></br>
+
       <input type="submit" value="Submit" />
     </form>
   </div>
