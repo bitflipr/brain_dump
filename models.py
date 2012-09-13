@@ -8,10 +8,12 @@ class Dump(models.Model):
   LINK = 'L'
   POST = 'B'
   PICTURE = 'P'
+  TODO = 'T'
   DUMP_TYPES = (
     (LINK, 'Link'),
     (POST, 'Post'),
     (PICTURE, 'Picture'),
+    (TODO, 'To-do'),
   )
 
   type = models.CharField(max_length=2, choices=DUMP_TYPES, default=POST)

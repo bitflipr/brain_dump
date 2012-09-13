@@ -11,3 +11,5 @@
 # Ignore Vim's swap files
 *.swp
 
+# Ignore scheme migrations
+evolutions
