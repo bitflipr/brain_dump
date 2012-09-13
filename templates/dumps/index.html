@@ -10,15 +10,21 @@
     <form action="{% url brain_dump.views.add %}" method="post">
       {% csrf_token %}
 
-      Type:<select name="type">
-        <option value="B">Post</option>
-        <option value="L">Link</option>
-        <option value="P">Picture</option>
-      </select><br/>
-      Title:<input type="text" name="title" /></br>
-      Description:<textarea name="description" rows="4" cols="50"></textarea></br>
+      <fieldset><legend>Information:</legend>
+        Type:<select name="type">
+          <option value="B">Post</option>
+          <option value="L">Link</option>
+          <option value="P">Picture</option>
+        </select>
+        Follow-up:<input type="checkbox" name="follow_up" value="yes"/></br></br> 
+        Title:<input type="text" name="title" size="50"/></br>
+        URL:<input type="url" name="link" size="50"/></br>
+        Description:</br><textarea name="description" rows="4" cols="50"></textarea></br>
+        Tags:<input type="text" name="tags" size="50"/></br>
 
-      <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" />
+      </fieldset>
+
     </form>
   </div>
 {% endif %}
