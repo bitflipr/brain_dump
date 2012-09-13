@@ -13,3 +13,4 @@
 
 # Ignore scheme migrations
 evolutions
+migrations
