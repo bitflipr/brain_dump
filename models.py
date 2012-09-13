@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 import datetime, httplib, urlparse
 
 from taggit.managers import TaggableManager
@@ -19,7 +18,7 @@ class Dump(models.Model):
   title = models.CharField(max_length=128)
   description = models.TextField(blank=True)
   follow_up = models.BooleanField(default=False)
-  date = models.DateTimeField(default=timezone.now())
+  date = models.DateTimeField(auto_now=True)
   tags = TaggableManager(blank=True)
 
   def __unicode__(self):
