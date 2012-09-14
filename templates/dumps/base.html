@@ -9,7 +9,7 @@
 
 <body>
 
-<a href="{% url dump_index %}"><h1>Brain Dump</h1></a>
+<a href="{% url brain_dump.views.index %}"><h1>Brain Dump</h1></a>
   
   {% if user.is_authenticated %}
     <p>Signed In: {{ user }}</p>

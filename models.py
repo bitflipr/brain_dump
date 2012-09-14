@@ -22,6 +22,7 @@ class Dump(models.Model):
   follow_up = models.BooleanField(default=False)
   date = models.DateTimeField(auto_now=True)
   tags = TaggableManager(blank=True)
+  private = models.BooleanField(default=False)
 
   def __unicode__(self):
     return self.type + u"'" + self.title + u"'"

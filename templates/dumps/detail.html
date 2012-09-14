@@ -8,6 +8,24 @@
 <h2>{{ dump.date }}</h2>
 
 <p>
+Follow-up:
+{% if dump.follow_up %}
+&#x2713
+{% else %}
+&#x2717
+{% endif %}
+</p>
+
+<p>
+Private:
+{% if dump.private %}
+&#x2713
+{% else %}
+&#x2717
+{% endif %}
+</p>
+
+<p>
 Tags:
 {% for tag in dump.tags.all %}
   {{ tag.name }}, 
