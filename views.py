@@ -10,7 +10,12 @@ import StringIO
 import csv
 
 def index(request):
-  dump_list = Dump.objects.all().order_by('date').reverse()
+  if request.user.is_authenticated():
+    dump_list = Dump.objects.all()
+  else:
+    dump_list = Dump.objects.filter(private=False)
+
+  dump_list = dump_list.order_by('date').reverse()
 
   return render_to_response(
     'dumps/index.html', 
