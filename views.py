@@ -30,23 +30,26 @@ def new(request):
 
 def add(request):
   if request.method == 'POST':
-    dump = Dump.objects.create(
-      type=request.POST['type'],
-      title=request.POST['title'],
-      description=request.POST['description'])
-    if 'follow_up' in request.POST and request.POST['follow_up'] == 'yes':
-      dump.follow_up = True
-    if 'private' in request.POST and request.POST['private'] == 'yes':
-      dump.private = True
-    if 'link' in request.POST and len(request.POST['link'])>0:
-      link = dump.link_set.create(url=request.POST['link'])
-    if 'tags' in request.POST and len(request.POST['tags'])>0:
-      reader = csv.reader(StringIO.StringIO(request.POST['tags']), delimiter=',')
-      for row in reader:
-        for tag in row:
-          dump.tags.add(tag)
-    dump.save()  
-    return HttpResponseRedirect(reverse('brain_dump.views.index'))
+    if request.user.has_perm('brain_dump.add_dump'):
+      dump = Dump.objects.create(
+        type=request.POST['type'],
+        title=request.POST['title'],
+        description=request.POST['description'])
+      if 'follow_up' in request.POST and request.POST['follow_up'] == 'yes':
+        dump.follow_up = True
+      if 'private' in request.POST and request.POST['private'] == 'yes':
+        dump.private = True
+      if 'link' in request.POST and len(request.POST['link'])>0:
+        link = dump.link_set.create(url=request.POST['link'])
+      if 'tags' in request.POST and len(request.POST['tags'])>0:
+        reader = csv.reader(StringIO.StringIO(request.POST['tags']), delimiter=',')
+        for row in reader:
+          for tag in row:
+            dump.tags.add(tag)
+      dump.save()  
+      return HttpResponseRedirect(reverse('brain_dump.views.index'))
+    else:
+      return HttpResponse('You do not have permission to add a Dump')
   else:
     return HttpResponse('You cannot add a Dump using GET')
 
