@@ -36,7 +36,8 @@
     <p>
       {% if dump.follow_up %}*{% endif %}
       [{{ dump.type }}]
-      <a href="{% url dump_detail dump.id %}">{{ dump.title }}</a>
+      <a href="{% url dump_detail dump.id %}">{{ dump.title }}</a></br>
+      {{ dump.date }}
     </p>
   {% endfor %}
 {% else %}
