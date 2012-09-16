@@ -6,6 +6,7 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+{% if perms.brain_dump.add_dump %}
   <input type="button" value="Create Dump" onclick="toggleVisibilityOfControl('NewForm');" />
   <div id="NewForm" style="display:none">
     <form action="{% url brain_dump.views.add %}" method="post">
@@ -30,6 +31,7 @@
 
     </form>
   </div>
+{% endif %}
 
 {% if dump_list %}
   {% for dump in dump_list %}
