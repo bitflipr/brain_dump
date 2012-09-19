@@ -53,6 +53,28 @@ def add(request):
   else:
     return HttpResponse('You cannot add a Dump using GET')
 
+def edit(request, dump_id):
+  if request.method == 'POST':
+    if request.user.has_perm('brain_dump.add_dump'):
+      dump = get_object_or_404(Dump, pk=dump_id)
+      if 'follow_up' in request.POST and request.POST['follow_up'] == 'yes':
+        dump.follow_up = False
+      dump.save()
+      return HttpResponseRedirect(reverse('dump_detail', args=(dump.id,)))
+    else:
+      return HttpResponse('You do not have permission to edit a Dump')
+  else:
+    return HttpResponse('You cannot edit a Dump using GET')
+
+def follow_up(request, dump_id):
+  if request.user.has_perm('brain_dump.edit_dump'):
+    dump = get_object_or_404(Dump, pk=dump_id)
+    dump.follow_up = False
+    dump.save()
+    return HttpResponseRedirect(reverse('brain_dump.views.index'))
+  else:
+    return HttpResponse('You do not have permission to follow-up on a Dump')
+
 def sign_out(request):
   logout(request)
   return HttpResponseRedirect(reverse('brain_dump.views.index'))

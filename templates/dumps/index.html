@@ -6,6 +6,7 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+<!-- Users with add permission will have an in-page form for adding new dumps -->
 {% if perms.brain_dump.add_dump %}
   <input type="button" value="Create Dump" onclick="toggleVisibilityOfControl('NewForm');" />
   <div id="NewForm" style="display:none">
@@ -36,7 +37,16 @@
 {% if dump_list %}
   {% for dump in dump_list %}
     <p>
-      {% if dump.follow_up %}*{% endif %}
+
+      <!-- form to quickly follow-up on a dump -->
+      {% if dump.follow_up %}
+      <form action="{% url brain_dump.views.follow_up dump.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Follow-Up" />
+      </form>
+      {% endif %}
+
+      <!-- display a quick line on the dump -->
       [{{ dump.type }}]
       <a href="{% url dump_detail dump.id %}">
         {% if dump.title %}
@@ -46,6 +56,7 @@
         {% endif %}
       </a></br>
       {{ dump.date }}
+
     </p>
   {% endfor %}
 {% else %}
