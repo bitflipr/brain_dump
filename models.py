@@ -20,7 +20,7 @@ class Dump(models.Model):
   title = models.CharField(max_length=128)
   description = models.TextField(blank=True)
   follow_up = models.BooleanField(default=False)
-  date = models.DateTimeField(auto_now=True)
+  date = models.DateTimeField(auto_now_add=True)
   tags = TaggableManager(blank=True)
   private = models.BooleanField(default=False)
 
